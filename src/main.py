@@ -6,10 +6,11 @@ from typing import TypedDict, Tuple
 from langchain_core.output_parsers import StrOutputParser
 from langgraph.graph import StateGraph, END
 
+from src.facts2triples import convert_schema_to_triples
+from src.llms import llm_rewriter, llm_extractor, prompt_extractor, rewriting_template
 from src.ontology_checker import OntologyChecker
 from src.scenarios import *
-from src.llms import llm_rewriter, llm_extractor, prompt_extractor, rewriting_template
-from src.facts2triples import convert_schema_to_triples
+
 
 class AgentState(TypedDict):
     original_story: str
@@ -23,6 +24,7 @@ class AgentState(TypedDict):
 checker = OntologyChecker("./final_version5.rdf")
 
 chain_extractor = prompt_extractor | llm_extractor | StrOutputParser()
+
 
 def extract_facts(state: AgentState) -> dict:
     print(f"\n--- NODE: Fact extraction (Interation {state['iteration_count']})")
@@ -80,11 +82,13 @@ def rewrite_story(state: AgentState) -> dict:
 def decide_next_step(state: AgentState) -> str:
     print("--- NODE: Checking violoaitons (decision) ---")
     if not state["inconsistencies"]:
-        print("Decision: No violences. Ended"); return "end"
+        print("Decision: No violences. Ended");
+        return "end"
     if state["iteration_count"] >= state["max_iterations"]: print(
         f"Decision: Interation range error ({state['max_iterations']}). Ended."); return "end"
     print(f"Decision: Found {len(state['inconsistencies'])} violations. Rewriting.")
     return "rewrite"
+
 
 def create_agent_state():
     workflow = StateGraph(AgentState)
@@ -129,7 +133,8 @@ if __name__ == "__main__":
             print(f"Original story:\n{final_state_snapshot.get('original_story', 'NO DATA')}")
             final_inconsistencies = final_state_snapshot.get('inconsistencies', [])
             iterations = final_state_snapshot.get('iteration_count', 1) - 1
-            print(f"Final story (after {iterations} iterations of rewriting):\n{final_state_snapshot.get('current_story', 'NO DATA')}")
+            print(
+                f"Final story (after {iterations} iterations of rewriting):\n{final_state_snapshot.get('current_story', 'NO DATA')}")
             if not final_inconsistencies:
                 print("\nStory succed.")
             else:

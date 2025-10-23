@@ -1,5 +1,5 @@
-from typing import Optional
 import re
+from typing import Optional
 
 CANONICAL_IDS = {
     "newyork": "city:NewYorkCity",
@@ -9,6 +9,7 @@ CANONICAL_IDS = {
     "empirestatebuilding": "city:EmpireStateBuilding",
     # Add other known landmarks/cities if needed
 }
+
 
 def clean_and_prefix(name: str, default_prefix: str) -> Optional[str]:
     if not name or not isinstance(name, str): return None
@@ -30,6 +31,7 @@ def clean_and_prefix(name: str, default_prefix: str) -> Optional[str]:
     if not cleaned_name: return None
     return f"{default_prefix}:{cleaned_name}"
 
+
 def convert_schema_to_triples(data: dict) -> list:
     triples = []
     city_name_to_id = {}
@@ -43,7 +45,8 @@ def convert_schema_to_triples(data: dict) -> list:
         city_id = clean_and_prefix(city_id_str, "city")
         if city_id:
             try:
-                city_name = city_id.split(":", 1)[1]; city_name_to_id[city_name] = city_id
+                city_name = city_id.split(":", 1)[1];
+                city_name_to_id[city_name] = city_id
             except IndexError:
                 pass
 

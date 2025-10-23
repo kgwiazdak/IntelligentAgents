@@ -292,19 +292,19 @@ WHERE {{
 # --- Final Dictionary of Queries ---
 # Contains only the active, corrected queries.
 ALL_QUERIES = {
-    "allergy_violation": QUERY_ALLERGY,                     # STORY_1, STORY_6
-    "drivable_city_obesity_missing": QUERY_DRIVABLE_CITY_OBESITY, # STORY_2 (needs livesIn)
-    "underage_marriage": QUERY_UNDERAGE_MARRIAGE,           # STORY_3 (simplified + fix)
-    "conflicting_traits": QUERY_CONFLICTING_TRAITS,         # STORY_4 (corrected names)
-    "baker_missing_oven": QUERY_PERSON_AS_BAKER_MISSING_OVEN,           # STORY_5 (corrected logic)
-    "disjoint_health_conditions": QUERY_DISJOINT_HEALTH_CONDITIONS_EXPLICIT_CHECK, # STORY_7
-    "walkable_mountain_city": QUERY_WALKABLE_MOUNTAIN_CITY,   # STORY_8
-    "landmark_multiple_cities": QUERY_LANDMARK_MULTIPLE_CITIES,# STORY_9
-    "subway_no_city": QUERY_SUBWAY_NO_CITY,                 # STORY_10
-    "city_size_population_mismatch": QUERY_CITY_SIZE_POPULATION_MISMATCH, # STORY_11 (corrected)
-    "adjacent_to_completion": QUERY_ADJACENT_COMPLETION,      # STORY_12
-    "desert_climate_food": QUERY_DESERT_CLIMATE_FOOD,         # STORY_13
-    "snow_above_zero": QUERY_SNOW_ABOVE_ZERO,               # STORY_14
+    "allergy_violation": QUERY_ALLERGY,  # STORY_1, STORY_6
+    "drivable_city_obesity_missing": QUERY_DRIVABLE_CITY_OBESITY,  # STORY_2 (needs livesIn)
+    "underage_marriage": QUERY_UNDERAGE_MARRIAGE,  # STORY_3 (simplified + fix)
+    "conflicting_traits": QUERY_CONFLICTING_TRAITS,  # STORY_4 (corrected names)
+    "baker_missing_oven": QUERY_PERSON_AS_BAKER_MISSING_OVEN,  # STORY_5 (corrected logic)
+    "disjoint_health_conditions": QUERY_DISJOINT_HEALTH_CONDITIONS_EXPLICIT_CHECK,  # STORY_7
+    "walkable_mountain_city": QUERY_WALKABLE_MOUNTAIN_CITY,  # STORY_8
+    "landmark_multiple_cities": QUERY_LANDMARK_MULTIPLE_CITIES,  # STORY_9
+    "subway_no_city": QUERY_SUBWAY_NO_CITY,  # STORY_10
+    "city_size_population_mismatch": QUERY_CITY_SIZE_POPULATION_MISMATCH,  # STORY_11 (corrected)
+    "adjacent_to_completion": QUERY_ADJACENT_COMPLETION,  # STORY_12
+    "desert_climate_food": QUERY_DESERT_CLIMATE_FOOD,  # STORY_13
+    "snow_above_zero": QUERY_SNOW_ABOVE_ZERO,  # STORY_14
     # STORY_15 Queries:
     "walking_distance_violation": QUERY_WALKING_DISTANCE,
     "walking_speed_violation": QUERY_WALKING_SPEED,
