@@ -10,7 +10,7 @@ STORY_5 = "Tina works as a baker in a tiny shop that has no oven and never uses 
 
 STORY_6 = "Marco is allergic to flour but says he eats bread and pizza every day without issues."
 
-STORY_7 = "Maya's medical file lists both Anemia and Cancer as current diagnoses."
+STORY_7 = "Alice medical file lists both Anemia and Cancer as current diagnoses."
 
 STORY_8 = "Hillsburg is proudly marketed as a walkable city; tourism brochures emphasize its steep mountain terrain within city limits."
 

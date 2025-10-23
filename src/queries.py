@@ -78,33 +78,41 @@ WHERE {{
 
 # --- STORY_5: Baker Missing Oven (Specific Check) ---
 # Checks if an instance classified as a Baker does not have the required 'usesTool Oven' relation.
-QUERY_BAKER_MISSING_OVEN = f"""
+QUERY_PERSON_AS_BAKER_MISSING_OVEN = f"""
 {PREFIXES}
-SELECT ?bakerInstance
+SELECT ?person
 WHERE {{
-    # Find instances of Baker
-    ?bakerInstance rdf:type demo:Baker .
-    # Check if the 'usesTool Oven' relation does NOT exist for this instance
+    ?person rdf:type demo:Person .
+    ?person demo:worksAs demo:Baker . 
+
     FILTER NOT EXISTS {{
-        ?bakerInstance demo:usesTool demo:Oven .
+         ?person demo:usesTool ?anyTool .
     }}
 }}
 """
 
 # --- STORY_7: Disjoint Health Conditions ---
 # Checks if a person has two health conditions declared as disjoint in the ontology.
-QUERY_DISJOINT_HEALTH_CONDITIONS = f"""
+
+QUERY_DISJOINT_HEALTH_CONDITIONS_EXPLICIT_CHECK = f"""
 {PREFIXES}
-SELECT ?person ?condition1 ?condition2
+SELECT ?person ?conditionClass1 ?conditionClass2
 WHERE {{
-    ?person demo:hasCondition ?condition1 .
-    ?person demo:hasCondition ?condition2 .
-    # Find pairs of conditions that are disjoint
-    {{ ?condition1 owl:disjointWith ?condition2 . }}
+    # Find a person linked to two different condition class URIs
+    ?person demo:hasCondition ?conditionClass1 .
+    ?person demo:hasCondition ?conditionClass2 .
+
+    # Ensure we are looking at two different conditions assigned to the person
+    FILTER (?conditionClass1 != ?conditionClass2)
+
+    # Now, explicitly check if these two classes are disjoint in the ontology
+    # Use UNION for robustness
+    {{ ?conditionClass1 owl:disjointWith ?conditionClass2 . }}
     UNION
-    {{ ?condition2 owl:disjointWith ?condition1 . }} # Ensure symmetry
-    # Avoid self-comparison and duplicate pairs (e.g., Anemia/Cancer vs Cancer/Anemia)
-    FILTER (STR(?condition1) < STR(?condition2))
+    {{ ?conditionClass2 owl:disjointWith ?conditionClass1 . }}
+
+    # Avoid duplicate pairs (e.g., Anemia/Cancer and Cancer/Anemia)
+    FILTER(STR(?conditionClass1) < STR(?conditionClass2))
 }}
 """
 
@@ -288,8 +296,8 @@ ALL_QUERIES = {
     "drivable_city_obesity_missing": QUERY_DRIVABLE_CITY_OBESITY, # STORY_2 (needs livesIn)
     "underage_marriage": QUERY_UNDERAGE_MARRIAGE,           # STORY_3 (simplified + fix)
     "conflicting_traits": QUERY_CONFLICTING_TRAITS,         # STORY_4 (corrected names)
-    "baker_missing_oven": QUERY_BAKER_MISSING_OVEN,           # STORY_5 (corrected logic)
-    "disjoint_health_conditions": QUERY_DISJOINT_HEALTH_CONDITIONS, # STORY_7
+    "baker_missing_oven": QUERY_PERSON_AS_BAKER_MISSING_OVEN,           # STORY_5 (corrected logic)
+    "disjoint_health_conditions": QUERY_DISJOINT_HEALTH_CONDITIONS_EXPLICIT_CHECK, # STORY_7
     "walkable_mountain_city": QUERY_WALKABLE_MOUNTAIN_CITY,   # STORY_8
     "landmark_multiple_cities": QUERY_LANDMARK_MULTIPLE_CITIES,# STORY_9
     "subway_no_city": QUERY_SUBWAY_NO_CITY,                 # STORY_10
