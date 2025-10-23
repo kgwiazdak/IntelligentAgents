@@ -8,7 +8,7 @@ from langgraph.graph import StateGraph, END
 
 from src.ontology_checker import OntologyChecker
 from src.scenarios import *
-from src.llms import llm_rewriter, llm_extractor, prompt_extractor
+from src.llms import llm_rewriter, llm_extractor, prompt_extractor, rewriting_template
 from src.facts2triples import convert_schema_to_triples
 
 class AgentState(TypedDict):
@@ -25,31 +25,27 @@ checker = OntologyChecker("./final_version5.rdf")
 chain_extractor = prompt_extractor | llm_extractor | StrOutputParser()
 
 def extract_facts(state: AgentState) -> dict:
-    print(f"\n--- WĘZEŁ: Ekstrakcja Faktów (Iteracja {state['iteration_count']}) ---")
+    print(f"\n--- NODE: Fact extraction (Interation {state['iteration_count']})")
     try:
         response_string = chain_extractor.invoke({"story": state['current_story']})
-        print(f"Otrzymano JSON od LLM:\n{response_string}")
         data_root = json.loads(response_string)
         if 'data' not in data_root:
-            print(">>> BŁĄD: LLM zwrócił JSON bez klucza 'data'. <<<")
             return {"extracted_facts": []}
         triples = convert_schema_to_triples(data_root['data'])
-        print(f"Wygenerowano {len(triples)} trójek RDF.")
+        print(f"Generated {len(triples)} triples.")
         return {"extracted_facts": triples}
     except json.JSONDecodeError as e:
-        print(f">>> BŁĄD DEKODOWANIA JSON (Model zignorował format='json'?): {e} <<<")
-        print(f"Otrzymano:\n{response_string}")
+        print(f"Received:\n{response_string}")
         return {"extracted_facts": []}
     except Exception as e:
-        print(f">>> KRYTYCZNY BŁĄD podczas ekstrakcji: {e} <<<")
+        print(f"Error: {e}")
         return {"extracted_facts": []}
 
 
 def query_ontology(state: AgentState) -> dict:
-    print("--- WĘZEŁ: Zapytania do Ontologii i Wnioskowanie ---")
+    print("--- NODE: Ontology and reasoning")
     facts = state["extracted_facts"]
     if not facts:
-        print("Brak faktów do sprawdzenia. Pomijanie.")
         return {"inconsistencies": []}
     print(facts)
     violations = checker.check_consistency(facts)
@@ -57,49 +53,22 @@ def query_ontology(state: AgentState) -> dict:
 
 
 def rewrite_story(state: AgentState) -> dict:
-    """
-    Węzeł 3: Przepisywanie Historii. Używa standardowego LLM.
-    NOWA WERSJA: Z BARDZIEJ INSTRUKCYJNYM promptem dla sprzecznych cech.
-    """
-    print("--- WĘZEŁ: Rozwiązywanie Konfliktów i Przepisywanie ---")
+    print("--- NODE: Fixing issues and rewriting ---")
 
     errors_list = "\n".join(state["inconsistencies"])
     original_story = state["original_story"]
 
-    # --- NOWY, BARDZIEJ INSTRUKCYJNY PROMPT ---
-    prompt_template = f"""
-You are a story editor. Your task is to rewrite the following story ONLY to fix the logical inconsistencies listed below.
-Apply the ABSOLUTE MINIMAL change necessary.
-
-**Crucially, if the inconsistency involves a conflict between a described trait (like 'reserved') and a described action (like 'talks to many people'), you MUST choose EITHER the trait OR the action to keep and REMOVE the conflicting part.**
-
-Maintain the original language (English), style, and overall plot.
-DO NOT add any commentary, explanation, or text other than the rewritten story itself.
-
-Original Story:
-"{original_story}"
-
-Detected Inconsistencies:
-{errors_list}
-
-Example fix for "reserved vs talks to many":
-Option A (Keep 'reserved'): "Luca is described as 'very reserved.' He preferred to keep to himself at the office."
-Option B (Keep 'talks to many'): "Luca, despite initial impressions, chatted with at least six different people every day at the office."
-
-Rewritten Story (English, minimal changes, choose ONE option if traits conflict, only the story text):
-"""
+    prompt_template = rewriting_template(original_story, errors_list)
 
     response = llm_rewriter.invoke(prompt_template)
     new_story = response.content.strip()
 
-    # Clean potential LLM preamble
     if new_story.startswith("Rewritten Story:"): new_story = new_story.replace("Rewritten Story:", "").strip()
     if new_story.startswith("Here is the rewritten story:"): new_story = new_story.replace(
         "Here is the rewritten story:", "").strip()
-    # Remove potential notes in parentheses added by LLM
     new_story = re.sub(r'\s*\([^)]*\)$', '', new_story).strip()
 
-    print(f"Przepisana historia:\n{new_story}")
+    print(f"Rewrited history:\n{new_story}")
 
     return {
         "current_story": new_story,
@@ -109,11 +78,12 @@ Rewritten Story (English, minimal changes, choose ONE option if traits conflict,
 
 
 def decide_next_step(state: AgentState) -> str:
-    print("--- WĘZEŁ: Sprawdzanie Niespójności (Decyzja) ---")
-    if not state["inconsistencies"]: print("Decyzja: Brak niespójności. Zakończono."); return "end"
+    print("--- NODE: Checking violoaitons (decision) ---")
+    if not state["inconsistencies"]:
+        print("Decision: No violences. Ended"); return "end"
     if state["iteration_count"] >= state["max_iterations"]: print(
-        f"Decyzja: Osiągnięto limit iteracji ({state['max_iterations']}). Zakończono."); return "end"
-    print(f"Decyzja: Znaleziono {len(state['inconsistencies'])} niespójności. Przechodzenie do przepisania.");
+        f"Decision: Interation range error ({state['max_iterations']}). Ended."); return "end"
+    print(f"Decision: Found {len(state['inconsistencies'])} violations. Rewriting.")
     return "rewrite"
 
 def create_agent_state():
@@ -149,22 +119,22 @@ stories_to_run = {
 if __name__ == "__main__":
     app = create_agent_state()
     for name, story_text in stories_to_run.items():
-        print(f"=== URUCHAMIANIE AGENTA DLA: {name} ===")
+        print(f"=== Run AGENT FOR: {name} ===")
         inputs = {"original_story": story_text, "current_story": story_text, "extracted_facts": [],
                   "inconsistencies": [], "iteration_count": 1, "max_iterations": 3}
         final_state_snapshot = {}
         for event in app.stream(inputs, stream_mode="values"):
             final_state_snapshot = event
         if final_state_snapshot:
-            print(f"Oryginalna historia:\n{final_state_snapshot.get('original_story', 'BRAK DANYCH')}")
+            print(f"Original story:\n{final_state_snapshot.get('original_story', 'NO DATA')}")
             final_inconsistencies = final_state_snapshot.get('inconsistencies', [])
             iterations = final_state_snapshot.get('iteration_count', 1) - 1
-            print(f"Ostateczna historia (po {iterations} iteracjach przepisania):\n{final_state_snapshot.get('current_story', 'BRAK DANYCH')}")
+            print(f"Final story (after {iterations} iterations of rewriting):\n{final_state_snapshot.get('current_story', 'NO DATA')}")
             if not final_inconsistencies:
-                print("\n✅ Historia jest spójna.")
+                print("\nStory succed.")
             else:
-                print("\n⚠️ UWAGA: Pozostały niespójności:")
+                print("\nStory failed. Found the following inconsistencies:")
                 for inconsistency in final_inconsistencies:
                     print(f"  - {inconsistency}")
         else:
-            print(f"\nBŁĄD KRYTYCZNY: Agent nie zwrócił żadnego stanu dla {name}.")
+            print(f"\nERROR: No state for {name}.")
