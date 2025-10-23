@@ -129,20 +129,22 @@ def create_agent_state():
     return app
 
 
-# --- Agent Execution ---
-stories_to_run = {  # Run all stories now
-    # "STORY_1": STORY_1,
-    # "STORY_2": STORY_2,
-    # "STORY_3": STORY_3,
-    # "STORY_4": STORY_4,
-    # "STORY_5": STORY_5,
-    # "STORY_6": STORY_6,
-    # "STORY_7": STORY_7,
-    # 'STORY_8': STORY_8,
-    # 'STORY_9': STORY_9,
-    # "STORY_10": STORY_10, "STORY_11": STORY_11, "STORY_12": STORY_12,
+stories_to_run = {
+    "STORY_1": STORY_1,
+    "STORY_2": STORY_2,
+    "STORY_3": STORY_3,
+    "STORY_4": STORY_4,
+    "STORY_5": STORY_5,
+    "STORY_6": STORY_6,
+    "STORY_7": STORY_7,
+    'STORY_8': STORY_8,
+    'STORY_9': STORY_9,
+    "STORY_10": STORY_10,
+    "STORY_11": STORY_11,
+    "STORY_12": STORY_12,
     "STORY_13": STORY_13,
-    # "STORY_14": STORY_14, "STORY_15": STORY_15,
+    "STORY_14": STORY_14,
+    "STORY_15": STORY_15,
 }
 if __name__ == "__main__":
     app = create_agent_state()
