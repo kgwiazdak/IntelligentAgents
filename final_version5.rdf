@@ -2839,6 +2839,17 @@
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/rubyorsmth/ontologies/2025/9/untitled-ontology-5#hasClimateZone"/>
+        <owl:hasValue rdf:resource="http://www.semanticweb.org/rubyorsmth/ontologies/2025/9/untitled-ontology-5#Desert"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/rubyorsmth/ontologies/2025/9/untitled-ontology-5#allowsForFood"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://example.org/ia2025#Food"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Restriction>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">

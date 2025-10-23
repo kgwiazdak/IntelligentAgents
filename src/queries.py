@@ -131,12 +131,12 @@ WHERE {{
 # Checks if any landmark has more than one 'locatedIn' relation.
 QUERY_LANDMARK_MULTIPLE_CITIES = f"""
 {PREFIXES}
-SELECT ?landmark (COUNT(?city) AS ?cityCount)
+SELECT ?landmark (COUNT(DISTINCT ?city) AS ?distinctCityCount) # Use DISTINCT
 WHERE {{
     ?landmark city:locatedIn ?city .
 }}
 GROUP BY ?landmark
-HAVING (COUNT(?city) > 1)
+HAVING (COUNT(DISTINCT ?city) > 1) 
 """
 
 # --- STORY_10: Subway System Without a City ---
