@@ -148,7 +148,7 @@ if __name__ == "__main__":
         if AGENT_MODE:
             print(f"=== Run AGENT FOR: {name} ===")
             inputs = {"original_story": story_text, "current_story": story_text, "extracted_facts": [],
-                    "inconsistencies": [], "iteration_count": 1, "max_iterations": 10}
+                    "inconsistencies": [], "iteration_count": 1, "max_iterations": 6}
             final_state_snapshot = {}
             for event in app.stream(inputs, stream_mode="values"):
                 final_state_snapshot = event
@@ -156,6 +156,7 @@ if __name__ == "__main__":
                 print(f"Original story:\n{final_state_snapshot.get('original_story', 'NO DATA')}")
                 final_inconsistencies = final_state_snapshot.get('inconsistencies', [])
                 iterations = final_state_snapshot.get('iteration_count', 1) - 1
+                print("--- FINAL STORY ---")
                 print(
                     f"Final story (after {iterations} iterations of rewriting):\n{final_state_snapshot.get('current_story', 'NO DATA')}")
                 if not final_inconsistencies:

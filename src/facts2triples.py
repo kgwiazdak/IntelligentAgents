@@ -54,10 +54,10 @@ def convert_schema_to_triples(data: dict) -> list:
         person_id = clean_and_prefix(person.get('id'), "demo")
         if not person_id: continue
         triples.append((person_id, "rdf:type", "demo:Person"))
-
         lives_in_city_id = clean_and_prefix(person.get('livesInCityID'), "city")
         if lives_in_city_id:
             triples.append((person_id, "demo:livesIn", lives_in_city_id))
+            person_lives_in_drivable = False
         elif person_id == "demo:Tom" and "city:Beijing" in city_name_to_id.values():
             # I know!! really dirty hack
             person_lives_in_drivable = True

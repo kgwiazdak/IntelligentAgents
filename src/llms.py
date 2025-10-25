@@ -62,7 +62,7 @@ prompt_extractor = PromptTemplate(
     input_variables=["story"]
 )
 
-print("Inicjalizing agent")
+print("Initialising agent")
 try:
     llm_extractor = ChatOllama(model="llama3.1").bind(format="json")
     llm_extractor.invoke("Hi. Return {'status':'ok'}")

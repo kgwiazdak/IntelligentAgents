@@ -139,6 +139,7 @@ GROUP BY ?landmark
 HAVING (COUNT(DISTINCT ?city) > 1) 
 """
 
+# note that this story is scrapped but we kept the query anyway
 # --- STORY_10: Subway System Without a City ---
 # Checks if a SubwaySystem lacks the required 'locatedIn' relation.
 QUERY_SUBWAY_NO_CITY = f"""
@@ -222,6 +223,7 @@ WHERE {{
 }}
 """
 
+# note that somme of these queries got scrapped from the story but we kept them anyway
 # --- STORY_15: Travel Limit Violations ---
 QUERY_WALKING_DISTANCE = f"""
 {PREFIXES}
@@ -315,4 +317,4 @@ ALL_QUERIES = {
 }
 
 # Print the number of queries loaded (for debugging)
-print(f"Załadowano ontologię i {len(ALL_QUERIES)} zapytań sprawdzających.")
+print(f"Amount of loaded queries: {len(ALL_QUERIES)}")
