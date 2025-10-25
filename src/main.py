@@ -6,10 +6,10 @@ from typing import TypedDict, Tuple
 from langchain_core.output_parsers import StrOutputParser
 from langgraph.graph import StateGraph, END
 
-from src.facts2triples import convert_schema_to_triples
-from src.llms import llm_rewriter, llm_extractor, prompt_extractor, rewriting_template
-from src.ontology_checker import OntologyChecker
-from src.scenarios import *
+from facts2triples import convert_schema_to_triples
+from llms import llm_rewriter, llm_extractor, prompt_extractor, rewriting_template , rewriting_template_baseline
+from ontology_checker import OntologyChecker
+from scenarios import *
 
 
 class AgentState(TypedDict):
@@ -78,6 +78,19 @@ def rewrite_story(state: AgentState) -> dict:
         "inconsistencies": []
     }
 
+def rewrite_story_baseline(original_story) -> str:
+    prompt_template = rewriting_template_baseline(original_story)
+
+    response = llm_rewriter.invoke(prompt_template)
+    new_story = response.content.strip()
+
+    if new_story.startswith("Rewritten Story:"): new_story = new_story.replace("Rewritten Story:", "").strip()
+    if new_story.startswith("Here is the rewritten story:"): new_story = new_story.replace(
+        "Here is the rewritten story:", "").strip()
+    new_story = re.sub(r'\s*\([^)]*\)$', '', new_story).strip()
+
+    print(f"Rewrited story:\n{new_story}")
+    return new_story
 
 def decide_next_step(state: AgentState) -> str:
     print("--- NODE: Checking violoaitons (decision) ---")
@@ -104,42 +117,56 @@ def create_agent_state():
 
 
 stories_to_run = {
-    "STORY_1": STORY_1,
-    "STORY_2": STORY_2,
-    "STORY_3": STORY_3,
-    "STORY_4": STORY_4,
-    "STORY_5": STORY_5,
-    "STORY_6": STORY_6,
-    "STORY_7": STORY_7,
-    'STORY_8': STORY_8,
-    'STORY_9': STORY_9,
-    "STORY_10": STORY_10,
-    "STORY_11": STORY_11,
-    "STORY_12": STORY_12,
-    "STORY_13": STORY_13,
-    "STORY_14": STORY_14,
-    "STORY_15": STORY_15,
+    "LARGE_STORY_1": LARGE_STORY_1
 }
+'''
+"STORY_1": STORY_1,
+"STORY_2": STORY_2,
+"STORY_3": STORY_3,
+"STORY_4": STORY_4,
+"STORY_5": STORY_5,
+"STORY_6": STORY_6,
+"STORY_7": STORY_7,
+'STORY_8': STORY_8,
+'STORY_9': STORY_9,
+"STORY_10": STORY_10,
+"STORY_11": STORY_11,
+"STORY_12": STORY_12,
+"STORY_13": STORY_13,
+"STORY_14": STORY_14,
+"STORY_15": STORY_15,
+'''
+# true turns on agent mode which includes itterated reasoning and an onthology
+# if false a baseline llama3.1 is used to rewrite the story
+# note that the baseline does utilize a similar rewriting instruction prompt as the agent mode
+AGENT_MODE = False
+
 if __name__ == "__main__":
     app = create_agent_state()
     for name, story_text in stories_to_run.items():
-        print(f"=== Run AGENT FOR: {name} ===")
-        inputs = {"original_story": story_text, "current_story": story_text, "extracted_facts": [],
-                  "inconsistencies": [], "iteration_count": 1, "max_iterations": 3}
-        final_state_snapshot = {}
-        for event in app.stream(inputs, stream_mode="values"):
-            final_state_snapshot = event
-        if final_state_snapshot:
-            print(f"Original story:\n{final_state_snapshot.get('original_story', 'NO DATA')}")
-            final_inconsistencies = final_state_snapshot.get('inconsistencies', [])
-            iterations = final_state_snapshot.get('iteration_count', 1) - 1
-            print(
-                f"Final story (after {iterations} iterations of rewriting):\n{final_state_snapshot.get('current_story', 'NO DATA')}")
-            if not final_inconsistencies:
-                print("\nStory succed.")
+        # agent + onthology mode
+        if AGENT_MODE:
+            print(f"=== Run AGENT FOR: {name} ===")
+            inputs = {"original_story": story_text, "current_story": story_text, "extracted_facts": [],
+                    "inconsistencies": [], "iteration_count": 1, "max_iterations": 10}
+            final_state_snapshot = {}
+            for event in app.stream(inputs, stream_mode="values"):
+                final_state_snapshot = event
+            if final_state_snapshot:
+                print(f"Original story:\n{final_state_snapshot.get('original_story', 'NO DATA')}")
+                final_inconsistencies = final_state_snapshot.get('inconsistencies', [])
+                iterations = final_state_snapshot.get('iteration_count', 1) - 1
+                print(
+                    f"Final story (after {iterations} iterations of rewriting):\n{final_state_snapshot.get('current_story', 'NO DATA')}")
+                if not final_inconsistencies:
+                    print("\nStory succed.")
+                else:
+                    print("\nStory failed. Found the following inconsistencies:")
+                    for inconsistency in final_inconsistencies:
+                        print(f"  - {inconsistency}")
             else:
-                print("\nStory failed. Found the following inconsistencies:")
-                for inconsistency in final_inconsistencies:
-                    print(f"  - {inconsistency}")
+                print(f"\nERROR: No state for {name}.")
+        # baseline mode
         else:
-            print(f"\nERROR: No state for {name}.")
+            rewrite_story_baseline(story_text)
+

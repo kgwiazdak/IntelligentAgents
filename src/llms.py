@@ -100,3 +100,22 @@ Option B (Keep 'talks to many'): "Luca, despite initial impressions, chatted wit
 
 Rewritten Story (English, minimal changes, choose ONE option if traits conflict, only the story text):
 """
+
+rewriting_template_baseline = lambda original_story: f"""
+You are a story editor. Your task is to rewrite the following story and fix logical inconsistencies listed below.
+Apply the ABSOLUTE MINIMAL change necessary.
+
+**Crucially, if the inconsistency involves a conflict between a described trait (like 'reserved') and a described action (like 'talks to many people'), you MUST choose EITHER the trait OR the action to keep and REMOVE the conflicting part.**
+
+Maintain the original language (English), style, and overall plot.
+DO NOT add any commentary, explanation, or text other than the rewritten story itself.
+
+Original Story:
+"{original_story}"
+
+Example fix for "reserved vs talks to many":
+Option A (Keep 'reserved'): "Luca is described as 'very reserved.' He preferred to keep to himself at the office."
+Option B (Keep 'talks to many'): "Luca, despite initial impressions, chatted with at least six different people every day at the office."
+
+Rewritten Story (English, minimal changes, choose ONE option if traits conflict, only the story text):
+"""
