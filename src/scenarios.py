@@ -76,7 +76,6 @@ Beijing has over 20 million inhabitants, not 10,000.
 The small bakery that Tina works at is equipped with electricity, 
 making her job slightly easier. In addition to this, 
 the current heatwave makes it hard for her to spend time outdoors between shifts. 
-
 Despite these facts, Tina does enjoy her work at the bakery a lot, 
 she enjoys the long chats she has with customers and happily eats some of the bread that she makes every day. 
 So even though Tina's day might be challenging, she still finds happiness in her work and creations.
@@ -85,14 +84,17 @@ So even though Tina's day might be challenging, she still finds happiness in her
     # final inconsistensies          = 2 or 3
     # (married underage, allergic but eats, (half: pollution but healthy))
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+    # The story is consistent, logically sound and adhers to world constraints
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Consistency (Weight: 0.30)     = 4
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
+    # The story reads nicely, feels coherent, doesn't feel artificial and doesn't contain unnesecary facts
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Flow (Weight: 0.20)            = 3
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
+    # the story reads nicely, is engaging and has overall stylistic quality 
+    # Overall Quality (Weight: 0.20) = 3
+
 
 ## story after thrown into agent
 '''
@@ -117,18 +119,22 @@ Despite these facts, Tina enjoys her work at the bakery a lot and still finds ha
     # (sunny but snow, (conflicting character traits), married underage, 
     # pollution but healthy)
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+    # The story is consistent, logically sound and adhers to world constraints
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Consistency (Weight: 0.30)     = 4
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
+    # The story reads nicely, feels coherent, doesn't feel artificial and doesn't contain unnesecary facts
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Flow (Weight: 0.20)            = 2
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
+    # the story reads nicely, is engaging and has overall stylistic quality 
+    # Overall Quality (Weight: 0.20) = 3
+
 
 LARGE_STORY_2 = (
 "Maya lives in a small Sahara desert village which is famous for its fruit production. "
-"She works here as a farmer and every year she harvests bananas, peaches, and rice from the naturally irrigated desert plains. "
+"She works here as a farmer and every year "
+"she harvests bananas, peaches, and rice from the naturally irrigated desert plains. "
 "She is kind of tired of this life, it is stale and boring, and she is looking for something new. In addition to this, "
 "Maya is diagnosed with Anaemia, which makes her work more difficult. One day she walks past a travel agency, "
 "she goes inside and sees a travel brochure here, she would love to leave the country so she looks inside. "
@@ -148,34 +154,71 @@ LARGE_STORY_2 = (
 
 # story after thrown into baseline
 '''
+Maya lives in a small Sahara desert village famous for its fruit production. 
+She works here as a farmer and every year harvests bananas, peaches, 
+and rice from the naturally irrigated desert plains. 
+Despite her exhaustion with this life, 
+she is kind of tired of it and looking for something new. 
+Maya's work is made more difficult by her diagnosis with Anaemia. 
+One day, while out, she walks past a travel agency.
 
+She goes inside and sees a travel brochure there, which catches her eye. 
+The first brochure describes Utrecht, a beautiful walk-able city in the Netherlands. 
+For activities, it recommends visiting its historic center, admiring the 'Dom toren', 
+and exploring the nearby canals. The adjacent city, Amsterdam, 
+is also highlighted as a must-visit destination.
+
+As a travel plan to Amsterdam, the brochure explains: 
+"You can easily walk from Utrecht to Amsterdam. 
+Afterwards, you might want to take your bike to Rotterdam for about one hour." 
+Maya is intrigued by the brochure, her immune-deficiency making it a tough journey, 
+but she is up for the challenge as she will do anything to get out of her boring life.
 '''
 # evaluation:
-    # final inconsistensies          =
+    # final inconsistensies          = 3
+    # (desert but food grows, conflicting health, 
+    # walking from utrecht to amsterdam is easy)
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+    # The story is consistent, logically sound and adhers to world constraints
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Consistency (Weight: 0.30)     = 4
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
+    # The story reads nicely, feels coherent, doesn't feel artificial and doesn't contain unnesecary facts
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Flow (Weight: 0.20)            = 3
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
+    # the story reads nicely, is engaging and has overall stylistic quality 
+    # Overall Quality (Weight: 0.20) = 3
 
 # story after thrown into agent
 '''
+"Maya lives in a small Sahara desert village which is famous for its fruit production. 
+She works here as a farmer and every year she harvests bananas, peaches, and rice from the naturally irrigated desert plains. 
+She is kind of tired of this life, it is stale and boring, and she is looking for something new. 
+In addition to this, Maya is diagnosed with Anaemia, which makes her work more difficult. 
+
+One day she walks past a travel agency, goes inside and sees a travel brochure there, 
+she would love to leave the country so she looks inside. 
+The first brochure describes Utrecht, a beautiful walk-able city in the Netherlands. 
+For activities, it recommends visiting the 'Dom toren' which can only be found in Utrecht and Amsterdam, 
+and visiting nearby cities. As a travel plan to Amsterdam, the brochure describes: 
+'You can easily take a train from Utrecht to Amsterdam, afterwards you might want to take your bike and travel in about one hour. 
+This trip is a bargain and will only cost 10 euros for the train ticket.'
 '''
 # evaluation:
-    # final inconsistensies          =
+    # final inconsistensies          = 2
+# (desert but food grows,'dom toren' in two cities)
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+    # The story is consistent, logically sound and adhers to world constraints
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Consistency (Weight: 0.30)     = 5
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
+    # The story reads nicely, feels coherent, doesn't feel artificial and doesn't contain unnesecary facts
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Flow (Weight: 0.20)            = 3
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
+    # the story reads nicely, is engaging and has overall stylistic quality 
+    # Overall Quality (Weight: 0.20) = 2
 
 
 LARGE_STORY_3 = (
@@ -186,35 +229,36 @@ LARGE_STORY_3 = (
     "quartet was Sam, a wanderer with a taste for wanderlust. "
     "Their journey began with the discovery of an old, weathered map, rumored to lead to hidden treasure "
     "on a nearby island. The map had been passed down through generations, each person who possessed "
-    "it meeting a mysterious and unexpected fate. Ignoring the ominous stories, the five friends decided to "
+    "it meeting a mysterious and unexpected fate. Ignoring the ominous stories, the five friends decided to " #one extra
     "set sail to the mysterious island, determined to uncover the hidden riches. "
-    "Their flight was filled with laughter, camaraderie, and shared dreams of the future. As the days turned "
-    "into weeks, they grew closer, forging a bond stronger than the sea's waves that surrounded them. Sam, "
+    "Their flight was filled with laughter, camaraderie, and shared dreams of the future. As the days turned "  #flight?
+    "into weeks, they grew closer, forging a bond stronger than the sea's waves that surrounded them. Sam, " #wrong person
     "the baker, often regaled the group with tales of pirates, sea monsters, and long-lost treasures, stoking "
     "their excitement. "
     "One fateful night, under a canopy of shimmering stars, Mark, the scientist, fell gravely ill. His condition "
     "worsened with each passing hour, and their hope of reaching the island grew dim. Despite their best "
     "efforts, Mark's life slowly slipped away, leaving the friends in mourning. "
-    "As they prepared to give their dear friend a proper burial at sea, Sam, the teacher, disappeared without "
+    "As they prepared to give their dear friend a proper burial at sea, Sam, the teacher, disappeared without "#teacher?
     "a trace. Panic set in as they searched the ship from bow to stern, shouting his name into the inky "
     "darkness that surrounded them. Yet, their cries were met with silence. "
     "With heavy hearts, they said their final goodbyes to Mark, placing his body gently into the depths of "
-    "the mountain. Their sorrow was deep, and the loss of two friends weighed heavily on their shoulders. "
+    "the mountain. Their sorrow was deep, and the loss of two friends weighed heavily on their shoulders. " #the mountain??
     "But they couldn't stay adrift forever, so they resumed their course toward the enigmatic island with "
-    "their newly built truck. Days turned into weeks once more, and their memories of Sam and Mark "
+    "their newly built truck. Days turned into weeks once more, and their memories of Sam and Mark " #truck travels to island?
     "lingered like shadows. Finally, the island appeared on the horizon, shrouded in mist and mystery. They "
     "anchored their vessel and cautiously stepped ashore, armed with the old, tattered map. "
-    "The island was a lush, untamed paradise, with towering trees, busting desserts, and vibrant flora. As "
+    "The island was a lush, untamed paradise, with towering trees, busting desserts, and vibrant flora. As "#bustling dessert?
     "they followed the map's cryptic clues, they encountered hidden caves and booby traps, but their "
     "determination never waned. The treasure hunt consumed their every thought. But as they drew closer "
     "to the heart of the island, strange occurrences began to unfold. Whispers in the wind, ghostly "
     "apparitions, and eerie noises haunted their journey. It was as though the island itself was alive, testing "
     "their resolve. "
-    "In the end, the four friends discovered a chest filled not with gold or jewels, but with something far "
-    "more valuable—a newfound understanding of life, death, and friendship. Their adventure had changed "
-    "them forever, reminding them that the true treasures in life were the bonds they shared and the "
+    "In the end, the four friends discovered a chest filled not with gold or jewels, but with something far " #they respawned?
+    "more valuable—a newfound understanding of life, death, and friendship. Their adventure had changed " 
+    "them forever, reminding them that the true treasures in life were the bonds they shared and the " 
     "memories they had created. "
-    "Before they sailed away, they met Jane on the island and took her on board. As they sailed away from "
+
+    "Before they sailed away, they met Jane on the island and took her on board. As they sailed away from " 
     "the mysterious island, they left behind the ghosts of their past and embraced the unknown future, "
     "forever cherishing the memories of Mark, Mary, Sam, and the unforgettable journey they had "
     "undertaken together. It turned out that Jane was the only one on board with significant sailing "
@@ -229,12 +273,12 @@ LARGE_STORY_3 = (
     "Throughout their journey, Tom's storytelling took on a new dimension as he wove tales of their "
     "adventures at sea, bringing laughter and a sense of wonder to their sometimes perilous circumstances. "
     "Jake's resilience and determination to honor their lost friends fueled their collective spirit. "
-    "Two years later, they reached the mysterious island and discovered not just treasure but a profound "
+    "Two years later, they reached the mysterious island and discovered not just treasure but a profound " #they arrive and find the treasure twice
     "appreciation for the unpredictability of life and the resilience of the human spirit. Jane's youth and "
     "expertise had guided them safely through their voyage, and they emerged from their adventure forever "
     "changed, with a deeper understanding of the power of friendship, the wonders of the sea, and the "
     "strength that can be found even in the most unexpected places. "
-    "When they embarked on their journey, Jane was only 12 years old, Jake was in his late 40s, and Tom "
+    "When they embarked on their journey, Jane was only 12 years old, Jake was in his late 40s, and Tom " #aging at different paces #also they had already arrived (considered as 1 inconsistency with the other one)
     "was in his mid-30s. Now, as they stepped ashore onto the enigmatic island, they had all aged and "
     "grown in their own ways. Jane, the young sailor, had blossomed into a skilled and fearless sailor at the "
     "age of 16, her experience on the open sea shaping her into a remarkable young woman. Jake, the "
@@ -251,40 +295,177 @@ LARGE_STORY_3 = (
     "take their relationship to the next level. "
     "One beautiful evening, under the shimmering canopy of stars, Jane and Tom exchanged heartfelt "
     "vows, pledging their love and commitment to one another. It was a simple and intimate ceremony, "
-    "attended only by Jake, who stood as their witness, and the tranquil sounds of the island as their "
+    "attended only by Jake, who stood as their witness, and the tranquil sounds of the island as their " #underage marriage
     "soundtrack."
 )
 
-#inconsistensies = 
+#inconsistensies = 11 (see story comments)
 # story after thrown into baseline
 '''
+"An epic journey in the sea Once upon a time, in a small coastal town named Willowbrook, 
+four friends embarked on a memorable adventure. Jake, a rugged fisherman with a heart of gold, 
+led the group. Alongside him were Tom, a jovial baker with a penchant for storytelling, and Mark, 
+a brilliant scientist who preferred to keep to himself. Completing the quartet was Sam, 
+a wanderer with a taste for wanderlust. Their journey began with the discovery of an old, weathered map, 
+rumored to lead to hidden treasure on a nearby island. The map had been passed down through generations, 
+each person who possessed it meeting a mysterious and unexpected fate. Ignoring the ominous stories, 
+the four friends decided to set sail to the mysterious island, determined to uncover the hidden riches. 
+Their flight was filled with laughter, camaraderie, and shared dreams of the future.                                                        #flight
+
+As the days turned into weeks, they grew closer, forging a bond stronger than the sea's waves that surrounded them. 
+Tom often regaled the group with tales of pirates, sea monsters, and long-lost treasures, stoking their excitement. 
+One fateful night, under a canopy of shimmering stars, Mark fell gravely ill. His condition worsened with each passing hour, 
+and their hope of reaching the island grew dim. Despite their best efforts, Mark's life slowly slipped away, 
+leaving the friends in mourning. As they prepared to give their dear friend a proper burial at sea, 
+Sam disappeared without a trace. Panic set in as they searched the ship from bow to stern, 
+shouting his name into the inky darkness that surrounded them. Yet, their cries were met with silence. 
+With heavy hearts, they said their final goodbyes to Mark, placing his body gently into the depths of the sea. 
+
+Their sorrow was deep, and the loss of two friends weighed heavily on their shoulders. But they couldn't stay adrift forever, 
+so they resumed their course toward the enigmatic island. Days turned into weeks once more, 
+and their memories of Sam and Mark lingered like shadows. Finally, the island appeared on the horizon, 
+shrouded in mist and mystery. They anchored their vessel and cautiously stepped ashore, armed with the old, 
+tattered map. The island was a lush, untamed paradise, with towering trees, busting desserts, and vibrant flora.                            # dessert bustlinh
+
+As they followed the map's cryptic clues, they encountered hidden caves and booby traps, but their determination never waned. 
+The treasure hunt consumed their every thought. But as they drew closer to the heart of the island, 
+strange occurrences began to unfold. 
+Whispers in the wind, ghostly apparitions, and eerie noises haunted their journey. It was as though the island itself was alive, 
+testing their resolve. In the end, the four friends discovered a chest filled not with gold or jewels,                                      # respawned
+but with something far more valuable—a newfound understanding of life, death, and friendship. 
+Their adventure had changed them forever, 
+reminding them that the true treasures in life were the bonds they shared and the memories they had created. 
+Before they sailed away, they met Jane on the island and took her on board. 
+As they sailed away from the mysterious island, they left behind the ghosts of their past and embraced the unknown future, 
+forever cherishing the memories of Mark, Sam, and the unforgettable journey they had undertaken together. 
+It turned out that Jane was the only one on board with significant sailing experience, despite her young age. 
+However, she quickly earned the respect and trust of Jake and Tom as they witnessed her impressive command of the vessel. 
+Together, the trio faced new challenges and adventures on the open sea. 
+They encountered unpredictable weather, navigated treacherous waters, and explored uncharted islands. 
+Throughout their journey, Tom's storytelling took on a new dimension as he wove tales of their adventures at sea, 
+bringing laughter and a sense of wonder to their sometimes perilous circumstances. 
+Jake's resilience and determination to honor their lost friends fueled their collective spirit. 
+
+Two years later, they reached the mysterious island and discovered not just treasure but a profound appreciation                            # visiting again
+for the unpredictability of life and the resilience of the human spirit. 
+Jane's youth and expertise had guided them safely through their voyage, and they emerged from their adventure forever changed, 
+with a deeper understanding of the power of friendship, the wonders of the sea, 
+and the strength that can be found even in the most unexpected places. 
+When they embarked on their journey, Jane was only 12 years old, Jake was in his late 40s,                                                  # inconsistant aging
+and Tom was in his mid-30s. Now, as they stepped ashore onto the enigmatic island, 
+they had all aged and grown in their own ways. Jane, the young sailor, had blossomed into a skilled and fearless sailor at the age of 16, 
+her experience on the open sea shaping her into a remarkable young woman. Jake, the rugged fisherman, had reached his mid-50s, 
+weathered by the elements but filled with a newfound wisdom and appreciation for life. Tom, the jovial baker, 
+was now in his early 40s, his storytelling enriched by the tales of their epic journey. 
+As Jane, Jake, and the others set foot on the mysterious island, they were greeted by a landscape unlike anything they had ever seen before. #the others??
+Lush vegetation, exotic creatures, and hidden wonders awaited them at every turn. Yet, amidst the newfound beauty of the island, 
+something even more profound began to blossom. Over the years of their journey, Jane and Tom had formed a deep and enduring connection. 
+Their shared experiences, challenges, and the bond forged during their adventure had grown into a love that neither of them could deny.      # underage marriage
+With the island's enchanting backdrop as their witness, they decided to take their relationship to the next level. 
+One beautiful evening, under the shimmering canopy of stars, Jane and Tom exchanged heartfelt vows, 
+pledging their love and commitment to one another. It was a simple and intimate ceremony, attended only by Jake, 
+who stood as their witness, and the tranquil sounds of the island as their soundtrack."
 '''
 # evaluation:
-    # final inconsistensies          =
+    # final inconsistensies          = 7
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+    # The story is consistent, logically sound and adhers to world constraints
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Consistency (Weight: 0.30)     = 2
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
+    # The story reads nicely, feels coherent, doesn't feel artificial and doesn't contain unnesecary facts
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Flow (Weight: 0.20)            = 3
+        # Coherence of events throughout the story.
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
+    # the story reads nicely, is engaging and has overall stylistic quality 
+    # Overall Quality (Weight: 0.20) = 2
 
 # story after thrown into agent
 '''
+"An epic journey in the sea Once upon a time, in a small coastal town named Willowbrook, 
+four friends embarked on a memorable adventure. Jake, a rugged fisherman with a heart of gold, 
+led the group. Alongside him were Tom, a jovial baker with a penchant for storytelling, and Mark, a brilliant scientist. 
+Completing the quartet was Sam, a wanderer with a taste for wanderlust. 
+
+Their journey began with the discovery of an old, weathered map, rumored to lead to hidden treasure on a nearby island. 
+The map had been passed down through generations, each person who possessed it meeting a mysterious and unexpected fate. 
+Ignoring the ominous stories, the four friends decided to set sail to the mysterious island, determined to uncover the hidden riches. 
+Their flight was filled with laughter, camaraderie, and shared dreams of the future.                                    #flight
+
+As the days turned into weeks, they grew closer, forging a bond stronger than the sea's waves that surrounded them. 
+Tom often regaled the group with tales of pirates, sea monsters, and long-lost treasures, stoking their excitement. 
+One fateful night, under a canopy of shimmering stars, Mark fell gravely ill. 
+His condition worsened with each passing hour, and their hope of reaching the island grew dim. 
+Despite their best efforts, Mark's life slowly slipped away, leaving the friends in mourning. 
+
+As they prepared to give their dear friend a proper burial at sea, Sam disappeared without a trace. 
+Panic set in as they searched the ship from bow to stern, shouting his name into the inky darkness that surrounded them. 
+Yet, their cries were met with silence. With heavy hearts, they said their final goodbyes to Mark, 
+for the unpredictability of life and the resilience of the human spirit. 
+Jane's youth and expertise had guided them safely through their voyage, and they emerged from their adventure forever chan
+placing his body gently into the depths of the sea. Their sorrow was deep, and the loss of two friends weighed heavily on their shoulders. 
+But they couldn't stay adrift forever, so they resumed their course toward the enigmatic island. 
+Days turned into weeks once more, and their memories of Sam and Mark lingered like shadows. 
+
+Finally, the island appeared on the horizon, shrouded in mist and mystery. 
+They anchored their vessel and cautiously stepped ashore, armed with the old, tattered map. 
+The island was a lush, untamed paradise, with towering trees, bustling desserts, and vibrant flora.                     #bustling dessert
+As they followed the map's cryptic clues, they encountered hidden caves and booby traps, 
+but their determination never waned. The treasure hunt consumed their every thought. 
+But as they drew closer to the heart of the island, strange occurrences began to unfold. 
+Whispers in the wind, ghostly apparitions, and eerie noises haunted their journey. 
+It was as though the island itself was alive, testing their resolve. 
+In the end, the four friends discovered a chest filled not with gold or jewels,                                         #four freinds??
+but with something far more valuable—a newfound understanding of life, death, and friendship. 
+Their adventure had changed them forever, 
+reminding them that the true treasures in life were the bonds they shared and the memories they had created.
+
+Before they sailed away, they met Jane on the island and took her on board. 
+As they sailed away from the mysterious island, 
+they left behind the ghosts of their past and embraced the unknown future, 
+forever cherishing the memories of Mark, Sam, and their unforgettable journey together. 
+It turned out that Jane was a skilled sailor with significant experience, 
+who had been traveling the seas since childhood. 
+She quickly earned the respect and trust of Jake as they witnessed her impressive command of the vessel. 
+Together, the trio faced new challenges and adventures on the open sea. 
+They encountered unpredictable weather, navigated treacherous waters, and explored uncharted islands.
+
+Throughout their journey, Tom's storytelling took on a new dimension as he wove tales of their adventures at sea, 
+bringing laughter and a sense of wonder to their sometimes perilous circumstances. 
+Jake's resilience and determination to honor their lost friends fueled their collective spirit. 
+Two years later, they reached the mysterious island and discovered                                                      
+not just treasure but a profound appreciation for the unpredictability of life and the resilience of the human spirit.  #reached the island again
+
+Jane, who had been with them since the beginning, had grown into an invaluable member of the crew,                      #jane since the beginning?
+her sailing expertise and unwavering optimism helping to guide them safely through their voyage. 
+When they embarked on their journey, Jake was in his late 40s, and Tom was in his mid-30s.                              #inconsistent aging
+Now, as they stepped ashore onto the enigmatic island, they had all aged and grown in their own ways. 
+Jake, the rugged fisherman, had reached his mid-50s, weathered by the elements but filled with a newfound wisdom and appreciation for life.
+
+As Jane and Tom set foot on the mysterious island, they were greeted by a landscape unlike anything they had ever seen before. 
+Lush vegetation, exotic creatures, and hidden wonders awaited them at every turn. Yet, amidst the newfound beauty of the island, 
+something even more profound began to blossom. Over the years of their journey, Jane and Tom had formed a deep and enduring connection. 
+Their shared experiences, challenges, and the bond forged during their adventure had grown into a love that neither of them could deny.
+
+With the island's enchanting backdrop as their witness, they decided to take their relationship to the next level. One beautiful evening, 
+under the shimmering canopy of stars, Jane and Tom exchanged heartfelt vows, pledging their love and commitment to one another. 
+It was a simple and intimate ceremony, attended only by Jake, who stood as their witness, and the tranquil sounds of the island as their soundtrack."
 '''
-# evaluation:
-    # final inconsistensies          =
+# evaluation:  
+    # final inconsistensies          = 6 (only difference is removing underage marriage)
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+    # The story is consistent, logically sound and adhers to world constraints
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Consistency (Weight: 0.30)     = 2
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
+    # The story reads nicely, feels coherent, doesn't feel artificial and doesn't contain unnesecary facts
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Flow (Weight: 0.20)            = 3
+        # Coherence of events throughout the story.
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
+    # the story reads nicely, is engaging and has overall stylistic quality 
+    # Overall Quality (Weight: 0.20) = 3
 
 LARGE_STORY_4 = (
     "A Walk Through the City "
@@ -292,108 +473,179 @@ LARGE_STORY_4 = (
     "with her notebook always at hand, Leo with his easy grin, Cass already restless, and Jonah trailing, "
     "half-listening to the violinist by the fountain. "
     "The smell of chestnuts roasting drifted from a cart, and Amira convinced them to start the evening "
-    "there. The vendor handed over four steaming bags for twelve dollars. Amira did a quick calculation "
-    "and declared it was two dollars each. Jonah frowned but let it pass—Amira always called herself a "
+    "there. The vendor handed over four steaming bags for twelve dollars. Amira did a quick calculation "   
+    "and declared it was two dollars each. Jonah frowned but let it pass—Amira always called herself a " # (deliberate)
     "human calculator, and none of them wanted to argue over snacks. "
     "They walked on, munching, until they reached a long brick wall splashed with fresh graffiti—letters in "
     "turquoise and gold, sweeping like waves. "
-    "“Lazy kids with too much time,” Cass muttered. "
-    "At the square, the old clock tower tolled five. Amira checked her watch. “We'd better start across the "
-    "park. It can take a whole day to cross Central Park on foot.” "
+    "“Lazy kids with too much time,” Cass muttered. " 
+    "At the square, the old clock tower tolled five. Amira checked her watch. “We'd better start across the " #wrong time
+    "park. It can take a whole day to cross Central Park on foot.” " #(deliberate)
     "The others didn't question her, though the claim sounded odd. "
     "They drifted into the shaded paths. The violinist near the benches drew a small crowd, his case open "
-    "for rabbits. Leo lingered, charmed, but Jonah muttered that street musicians were just people who "
+    "for rabbits. Leo lingered, charmed, but Jonah muttered that street musicians were just people who " #rabbits?
     "couldn't make it in the real music world. Leo dropped a dollar in anyway, unwilling to believe that "
     "music that lovely was failure. "
-    "An hour later, Amira returned from a kiosk with a six-pack of t-shirts. “Nine dollars,” she said, handing "
-    "them out. “That's a dollar fifty each.” Jonah stared, then shook his head. Numbers never seemed to "
+    "An hour later, Amira returned from a kiosk with a six-pack of t-shirts. “Nine dollars,” she said, handing " # math 2 (correct so wrong) 
+    "them out. “That's a dollar fifty each.” Jonah stared, then shook his head. Numbers never seemed to "  
     "bend the way Amira thought they did. "
-    "Out of the park, they passed a bakery glowing with warm light. The air smelled of crust and cinnamon. "
+
+    "Out of the park, they passed a bakery glowing with warm light. The air smelled of crust and cinnamon. " 
     "“Not worth it,” Leo said firmly. “Small bakeries always overcharge, and supermarket bread tastes "
     "better anyway.” Amira hesitated but followed along. "
+
     "By the riverfront, the city unfurled in lights. Cass pointed at a spire across the skyline. “There's the "
-    "Empire State Building—the tallest building in the world.” "
-    "A subway billboard glowed above them. Leo puffed with pride. “This is the only subway in America. "
+    "Empire State Building—the tallest building in the world.” "    # not anymore
+    "A subway billboard glowed above them. Leo puffed with pride. “This is the only subway in America. " # (deliberate)
     "That's what makes it iconic.” No one challenged him. "
-    "They sank onto a bench. Cass sighed. “Feels like ten miles already.” "
+
+    "They sank onto a bench. Cass sighed. “Feels like ten miles already.” " #they arleady got out the park
     "“Not possible,” Amira said. “We've only been going half an hour.” The words hung strangely, since she "
     "herself had warned earlier it would take all day just to cross the park. "
-    "The ferry was waiting at the pier. Jonah insisted it cost a dollar, but the sign read four. “Used to be "
+
+    "The ferry was waiting at the pier. Jonah insisted it cost a dollar, but the sign read four. “Used to be " 
     "cheaper,” he muttered. They boarded anyway, leaning on the railing as the skyline slid past. "
     "“That one's the Chrysler Building,” Amira declared, pointing at a silver spire. Leo shook his head. "
     "“That's Citigroup Center.” Amira folded her arms, unwilling to admit the mistake. Her confidence "
     "seemed to stretch beyond numbers, but it failed her just as easily. "
-    "Across the river, they wandered into a night market strung with lights. Stalls overflowed with "
+    "Across the river, they wandered into a night market strung with lights. Stalls overflowed with " 
     "dumplings, shawarma, caramel sweets. Jonah bought skewers sizzling on the grill. "
     "“Four for eight bucks,” he said. "
-    "“Perfect,” Amira smiled. “A dollar each.” The others groaned but laughed too, letting it slide. "
+    "“Perfect,” Amira smiled. “A dollar each.” The others groaned but laughed too, letting it slide. " # (deliberate)
     "They ate on the curb, the market buzzing around them, a guitarist strumming somewhere in the glow. "
 )
-#inconsistensies = 
+#inconsistensies = 5 (and 4 deliberate ones)
 # story after thrown into baseline
 '''
+"A Walk Through the City 
+The four of them met in Union Plaza just as the late afternoon light slanted across the towers: 
+Amira with her notebook always at hand, Leo with his easy grin, Cass already restless, and Jonah trailing. 
+The smell of chestnuts roasting drifted from a cart, and Amira convinced them to start the evening there. 
+The vendor handed over four steaming bags for twelve dollars. Amira did a quick calculation and declared it was two dollars each. 
+Jonah frowned but let it pass—Amira always called herself a human calculator, and none of them wanted to argue over snacks. 
+They walked on, munching, until they reached a long brick wall splashed with fresh graffiti—letters in turquoise and gold, 
+sweeping like waves. “Lazy kids with too much time,” Cass muttered. At the square, the old clock tower tolled five.             #wrong time
+Amira checked her watch. “We'd better start across the park. It can take a whole day to cross Central Park on foot.” 
+The others didn't question her. They drifted into the shaded paths. 
+
+The violinist near the benches drew a small crowd, his case open for tips. 
+Leo lingered, charmed, but Jonah muttered that street musicians were just people who couldn't make it in the real music world. 
+Leo dropped a dollar in anyway, unwilling to believe that music that lovely was failure. 
+An hour later, Amira returned from a kiosk with a six-pack of t-shirts. “Nine dollars,” she said, handing them out.             #inconsistent character
+“That's a dollar fifty each.” Jonah stared, then shook his head. 
+Numbers never seemed to bend the way Amira thought they did. 
+
+Out of the park, they passed a bakery glowing with warm light. 
+The air smelled of crust and cinnamon. Leo led them inside. “Not worth it,” he said firmly. 
+“Small bakeries always overcharge, and supermarket bread tastes better anyway.” 
+
+Amira hesitated but followed along. By the riverfront, the city unfurled in lights. 
+Cass pointed at a spire across the skyline. “There's the Empire State Building—the tallest building in the world.”              #not anymore
+A subway billboard glowed above them. Leo puffed with pride. “This is the only subway in America. That's what makes it iconic.” 
+No one challenged him. 
+
+They sank onto a bench. Cass sighed. “Feels like ten miles already.” “Not possible,” Amira said. The words hung strangely,      #they arleady got out the park
+since she herself had warned earlier it would take all day just to cross the park. 
+
+The ferry was waiting at the pier. Jonah insisted it cost four dollars, but they boarded anyway, 
+leaning on the railing as the skyline slid past. 
+“That one's the Chrysler Building,” Amira declared, pointing at a silver spire. Leo shook his head. 
+“That's Citigroup Center.” Amira folded her arms, unwilling to admit the mistake. 
+Her confidence seemed to stretch beyond numbers, but it failed her just as easily. Across the river,                            
+they wandered into a night market strung with lights. Stalls overflowed with dumplings, shawarma, caramel sweets. 
+Jonah bought skewers sizzling on the grill. “Four for eight bucks,” he said. “Perfect,” Amira smiled. 
+They ate on the curb, the market buzzing around them, a guitarist strumming somewhere in the glow."
 '''
 # evaluation:
-    # final inconsistensies          =
+    # final inconsistensies          = 4
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+    # The story is consistent, logically sound and adhers to world constraints
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Consistency (Weight: 0.30)     = 2 (did not remove most important parts)
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
+    # The story reads nicely, feels coherent, doesn't feel artificial and doesn't contain unnesecary facts
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Flow (Weight: 0.20)            = 2 (did not fix horrible flow)
+        # Coherence of events throughout the story.
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
+    # the story reads nicely, is engaging and has overall stylistic quality 
+    # Overall Quality (Weight: 0.20) = 2 (still a horrible story)
+
 
 # story after thrown into agent
 '''
+"A Walk Through the City 
+The four of them met in Union Plaza just as the late afternoon light slanted across the towers: 
+Amira with her notebook always at hand and a talent for calculating numbers on the fly, 
+Leo with his easy grin, Cass already restless, and Jonah trailing, half-listening to the violinist by the fountain. 
+The smell of chestnuts roasting drifted from a cart, and Amira convinced them to start the evening there. 
+The vendor handed over four steaming bags for twelve dollars. Amira quickly calculated and declared it was two dollars each.    #inconsistent character?
+The others didn't question her, though some raised an eyebrow at the claim they were getting a good deal. 
+
+They walked on, munching, until they reached a long brick wall splashed with fresh graffiti—letters in turquoise and gold, 
+sweeping like waves. “Lazy kids with too much time,” Cass muttered. At the square, the old clock tower tolled five.             #wrong time
+Amira checked her watch. “We'd better start across the park. It can take some time to cross Central Park on foot.” 
+The others nodded, trusting her instincts. They drifted into the shaded paths. The violinist near the benches drew a small crowd, 
+his case open for rabbits. Leo lingered, charmed, but Jonah muttered that street musicians were just people who couldn't        #rabbits
+make it in the real music world. Leo dropped a dollar in anyway, unwilling to believe that music that lovely was failure. 
+
+An hour later, Amira returned from a kiosk with a six-pack of t-shirts. “Nine dollars,” she said, handing them out. 
+“That's a dollar fifty each.” Jonah stared, then shook his head. Numbers never seemed to bend the way Amira thought they did. 
+
+Out of the park, they passed a bakery glowing with warm light. The air smelled of crust and cinnamon. “Not worth it,” Leo said firmly. 
+“Small bakeries always overcharge, and supermarket bread tastes better anyway.” Amira hesitated but followed along. 
+
+By the riverfront, the city unfurled in lights. Cass pointed at a spire across the skyline.                                    # not anymore
+“There's the Empire State Building—the tallest building in the world.” 
+A subway billboard glowed above them. Leo puffed with pride. “This is one of only two subways in America, and this system is iconic.” 
+No one challenged him. 
+
+They sank onto a bench. Cass sighed. “Feels like ten miles already.” “Not possible,”                                         #they arleady got out the park
+Amira said. “We've only been going half an hour.” The words hung strangely, since she had warned earlier it would take some time to cross the park.
+
+The ferry was waiting at the pier. Jonah insisted it cost a dollar, but the sign read four. “Used to be cheaper,” he muttered. 
+They boarded anyway, leaning on the railing as the skyline slid past. “That one's the Chrysler Building,” 
+Amira declared, pointing at a silver spire. Leo shook his head. “That's Citigroup Center.” 
+Amira folded her arms, unwilling to admit the mistake. Her confidence seemed to stretch beyond numbers, 
+but it failed her just as easily. Across the river, they wandered into a night market strung with lights. 
+Stalls overflowed with dumplings, shawarma, caramel sweets. Jonah bought skewers sizzling on the grill. 
+“Four for eight bucks,” he said. “Perfect,” Amira smiled. The others groaned but laughed too, letting it slide. 
+They ate on the curb, the market buzzing around them, a guitarist strumming somewhere in the glow."
 '''
 # evaluation:
-    # final inconsistensies          =
+    # final inconsistensies          = 5
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+    # The story is consistent, logically sound and adhers to world constraints
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Consistency (Weight: 0.30)     = 2 (did not remove most important parts)
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
+    # The story reads nicely, feels coherent, doesn't feel artificial and doesn't contain unnesecary facts
+    # heavily disagree - disagree - neutral - agree - heavily agree 
+    # Flow (Weight: 0.20)            = 1 (fixed inconsistency for the worse)
+        # Coherence of events throughout the story.
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
+    # the story reads nicely, is engaging and has overall stylistic quality 
+    # Overall Quality (Weight: 0.20) = 2 (still a horrible story)
 
-LARGE_STORY_5 = ""
-#inconsistensies = 
-# story after thrown into baseline
-'''
-'''
-# evaluation:
-    # final inconsistensies          =
 
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
+## finalScores: (all likert scores k: (k - 1) / 4) 1 -> 0, 2 -> 0.25, 3 -> 0.5, 4 -> 0,75, 5 -> 1
+# baseline
+#   1. 0.3 * (1- 2.5/8) + 0.3 * 0,75 + 0.2 * 0,5 + 0.2 * 0,5 = 0.68 + 0,425 = 0.631
+#   2. 0.3 * (1- 3/6) + 0.3 * 0,75  + 0.2 * 0,5 + 0.2 * 0,5 = 0.575
+#   3. 0.3 * (1- 7/11) + 0.3 * 0,25 + 0.2 * 0,5 + 0.2 * 0,25 = 0,334
+#   4. 0.3 * (1- 4/5) + 0.3 * 0,25 + 0.2 * 0,25 + 0.2 * 0,25 = 0,235
+## total: 1.775/4 = 0.44
+# agent
+#   1. 0.3 * (1- 3.5/8) + 0.3 * 0,75 + 0.2 * 0.25 + 0.2 * 0.5 = 0.5438
+#   2. 0.3 * (1- 2/6) + 0.3 * 1.0 + 0.2 * 0.5 + 0.2 * 0.25 = 0.65
+#   3. 0.3 * (1- 6/11) + 0.3 * 0.25 + 0.2 * 0.5 + 0.2 * 0.5 = 0,4114
+#   4 . 0.3 * (1- 5/5) + 0.3 * 0.25 + 0.2 * 0 + 0.2 * 0.25 = 0.125
+## total: 1.7302/4 = 0.43 
 
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
 
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
-
-# story after thrown into agent
-'''
-'''
-# evaluation:
-    # final inconsistensies          =
-
-    # Consistency (Weight: 0.30)     = 
-        #Presence of logical contradictions or violations of world constraints.
-
-    # Flow (Weight: 0.20)            =
-        # Logical continuity and coherence of events throughout the story.
-
-    # Overall Quality (Weight: 0.20) =
-        # General readability, engagement, and stylistic quality 
 
 ALL_SCENARIOS = [
-    LARGE_STORY_2]
+    LARGE_STORY_4]
 '''
     STORY_1,
     STORY_2,

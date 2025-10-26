@@ -117,7 +117,7 @@ def create_agent_state():
 
 
 stories_to_run = {
-    "LARGE_STORY_1": LARGE_STORY_1
+    "LARGE_STORY_4": LARGE_STORY_4
 }
 '''
 "STORY_1": STORY_1,
@@ -139,7 +139,7 @@ stories_to_run = {
 # true turns on agent mode which includes itterated reasoning and an onthology
 # if false a baseline llama3.1 is used to rewrite the story
 # note that the baseline does utilize a similar rewriting instruction prompt as the agent mode
-AGENT_MODE = False
+AGENT_MODE = True
 
 if __name__ == "__main__":
     app = create_agent_state()
