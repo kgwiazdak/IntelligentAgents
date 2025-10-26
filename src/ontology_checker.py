@@ -4,7 +4,7 @@ from owlrl import DeductiveClosure, RDFS_Semantics
 from rdflib import Graph, Literal, URIRef, Namespace
 from rdflib.namespace import RDF, RDFS, XSD, OWL
 
-from src.queries import ALL_QUERIES
+from queries import ALL_QUERIES
 
 
 class OntologyChecker:
